@@ -1,0 +1,144 @@
+﻿@using System
+@model Finance.Web.ViewModels.TransactionListViewModel
+
+@{
+    ViewBag.Title = "Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ContentHeader = "Transactions";
+}
+
+@section extracss
+{
+    <link href="~/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+    <div id="v-transactions" class="row">
+        <div class="col-md-12">
+            <section class="content-header">
+                <h1></h1>
+            </section>
+            <section>
+                <div>
+                    <p>
+                        Income: <span class="badge badge-success">{{ totalIncome }}</span>
+                        Expenses: <span class="badge badge-danger"> {{ totalExpenses }}</span>
+                    </p>
+                </div>
+            </section>
+            <div class='input-group date' id='dp_month_year' data-date-format="MM/YYYY">
+                <input type='text' id="transaction_date" class="form-control" value="@ViewBag.Date" placeholder="mm/yyyy" />
+                <span class="input-group-addon">
+                    <span class="fa fa-calendar"></span>
+                </span>
+                <span class="input-group-btn">
+                    <button id="date-search" class="btn btn-info btn-flat" v-on:click="getByDate">Go!</button>
+                </span>
+            </div>
+				<br />
+				<div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Transactions
+                    </div>
+                    <div class="card-block">
+                        <!-- <form id="search">
+                            Search <input name="query" v-model="searchQuery">
+                        </form> -->
+                        <br />
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th v-on:click="sortByAmount = !sortByAmount">Amount</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item, index) in gridData">
+                                    <td> {{ item.date }} </td>
+                                    <td> {{ item.description }} </td>
+                                    <td> {{ item.category.name }} </td>
+                                    <td> {{ item.amount }} </td>
+                                    <td>
+										<a :href="'/transaction/edit/' + item.id"><span class="fa fa-edit"></span> </a>
+                                        <a :href="'/transaction/delete/' + item.id"><span class="fa fa-trash"></span></a>
+									</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>
+                            <a href="@Url.Action("create","transaction")" class="btn btn-primary">Create Transaction</a>
+                        </p>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div id="morris-area-chart">
+            <canvas id="pie-expenses" style="height: 180px;"></canvas>
+        </div>
+    </div>
+</div>
+
+@section extrajs
+{
+    <script type="text/javascript" src="~/lib/momentjs/moment.js"></script>
+    <script type="text/javascript" src="~/lib/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="~/lib/chartjs/chart.js"></script>
+    <script type="text/javascript" src="~/js/random-color.js"></script>
+    <script type="text/javascript" src="~/js/finance.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="~/js/views/transaction/transaction-list.js"></script>
+}
+
+@section extrascripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('#dp_month_year').datetimepicker({
+                format: 'MM/YYYY'
+            });
+
+            $('.confirm-delete').on('click', function (event) {
+                var url = 'href="' + $(this).data('deleteurl') + '"';
+                finance.toastrConfirmDelete(event, url);
+            });
+
+            // getExpensesByCategory();
+	        // getCategories();
+        });
+
+        function getExpensesByCategory(){
+            $.ajax({
+                url: "/transaction/expensesbycategory",
+                cache: false,
+                dataType: "json",
+                type: "GET",
+                error: function(){
+                    console.log('failed to get data');
+                },
+                success: function(data){
+                    finance.drawPieChart(data, "pie-expenses");
+                }
+            });
+        }
+
+	    function getCategories(){
+            $.ajax({
+                url: "/api/v1/categories",
+                cache: false,
+                dataType: "json",
+                type: "GET",
+                error: function(){
+                    console.log('failed to get data');
+                },
+                success: function(data){
+                    console.log(data);
+                }
+            });
+        }
+    </script>
+}

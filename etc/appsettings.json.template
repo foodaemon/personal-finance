@@ -1,0 +1,12 @@
+{
+  "MongoUri": "mongodb://127.0.0.1:27017/finance_dev",
+  "Database": "finance_dev",
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Information",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  }
+}

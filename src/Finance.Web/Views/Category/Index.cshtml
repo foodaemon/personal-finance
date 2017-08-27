@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Finance.Common.Entities.Category>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<div id="v-categories" class="container-fluid">
+	<div class="animated fadeIn">
+	    <div class="row">
+	        <div class="col-md-12">
+	            <div class="card">
+	                <div class="card-header">
+	                    <i class="fa fa-align-justify"></i> Categories
+	                </div>
+	                <div class="card-block">
+						<form id="search">
+                            Search <input name="query" v-model="searchQuery">
+						</form>
+						<br />
+						<custom-grid
+							:data="gridData"
+							:columns="gridColumns"
+							:filter-key="searchQuery">
+						</custom-grid>
+	                    
+	                    <!-- <nav>
+	                        <ul class="pagination">
+	                            <li class="page-item">
+									<a class="page-link" href="#">Prev</a>
+	                            </li>
+	                            <li class="page-item active">
+	                                <a class="page-link" href="#">1</a>
+	                            </li>
+	                            <li class="page-item">
+									<a class="page-link" href="#">Next</a>
+	                            </li>
+	                        </ul>
+	                    </nav> -->
+	                </div>
+	            </div>
+	            <p>
+	                <a href="/category/create" class="btn btn-primary">Create New Category</a>
+	            </p>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<script type="text/x-template" id="grid-template">
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th v-for="key in columns" v-on:click="sortBy(key)" :class="{ active: sortKey == key }">
+            	{{ key | capitalize }} <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
+            </th>
+			<th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="entry in filteredData">
+            <td v-for="key in columns">{{entry[key]}}</td>
+			<td>
+				<a :href="'/category/edit/' + entry.id"><span class="fa fa-edit"></span> </a>
+				<a :href="'/category/delete/' + entry.id"><span class="fa fa-trash"></span></a>
+			</td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+
+@section extrajs
+{
+    <script type="text/javascript" src="~/js/views/category/category-list.js"></script>
+}

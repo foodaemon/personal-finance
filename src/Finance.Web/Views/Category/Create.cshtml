@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+
+@section extrajs
+{
+    <script type="text/javascript" src="~/Scripts/parsley.js"></script>
+}
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        @{ await Html.RenderPartialAsync("_CategoryForm"); }
+	</div>
+</div>
