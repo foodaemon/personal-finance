@@ -18,7 +18,13 @@ Vue.component('custom-grid', {
     props: {
         data: Array,
         columns: Array,
-        filterKey: String
+        filterKey: String,
+        displayNames: {
+            type: Object,
+            default() {
+                return {};
+            }
+        },
     },
     data: function () {
         var sortOrders = {};
@@ -54,8 +60,12 @@ Vue.component('custom-grid', {
         }
     },
     filters: {
-        capitalize: function (str) {
-            return str.charAt(0).toUpperCase() + str.slice(1)
+        getDisplayName: function(column, displayNames) {
+            if(column in displayNames) {
+                return displayNames[column];
+            } else {
+                return column.charAt(0).toUpperCase() + column.slice(1);
+            }
         }
     },
     methods: {
@@ -72,6 +82,10 @@ categoryList.vm = new Vue({
     data: {
         searchQuery: '',
         gridColumns: ['name', 'description',],
+        displayNames: {
+            'name': 'Category',
+            'description': 'Description',
+        },
         gridData: [],
     },
     created: function() {
