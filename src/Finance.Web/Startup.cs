@@ -7,6 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Finance.Core;
 using Finance.Web.Infrastructure;
+using Hangfire;
+using Hangfire.AspNetCore;
+using Hangfire.Redis;
+using StackExchange.Redis;
 
 namespace Finance.Web
 {
@@ -27,6 +31,11 @@ namespace Finance.Web
                 .RequireAuthenticatedUser()
                 .Build();
             
+            services.AddHangfire(configuration =>
+            {
+                configuration.UseRedisStorage(Configuration.GetConnectionString("Redis"));
+            });
+            
             services.AddAuthentication(o => 
             {
                 o.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -39,7 +48,7 @@ namespace Finance.Web
                 options.AccessDeniedPath = "/Error/Forbidden/";
                 options.LogoutPath = "/Auth/Signout/";
             });
-			
+
             services.AddMvc();
 
 			// Register Services (Dependency Injection)
@@ -59,6 +68,9 @@ namespace Finance.Web
             {
                 app.UseExceptionHandler("/Error/Index");
             }
+            
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
 
             app.UseStaticFiles();
 
@@ -71,7 +83,7 @@ namespace Finance.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-
+            // RecurringJob.AddOrUpdate(() => HangfireJobs.PrintToDebug($@"Hangfire recurring task started - {Guid.NewGuid()}"), Cron.Minutely);
         }
     }
 }
