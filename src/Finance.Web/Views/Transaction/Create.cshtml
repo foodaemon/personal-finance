@@ -1,43 +1,149 @@
-﻿@{
+﻿@model  Finance.Web.ViewModels.TransactionViewModel
+
+@{
     ViewBag.Title = "Create";
 }
 
-@section extracss
+@section extracss 
 {
-    <link href="~/lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/lib/bulma-calendar/css/bulma-calendar.min.css">
 }
+
+<div id="v-transaction-form" class="columns is-multiline">
+    <div class="column is-12">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { data_parsley_validate = "", role="form" })) 
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Transaction.Id)
+    
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Category</label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-narrow">
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                            @Html.DropDownListFor(model => model.Transaction.CategoryId, Model.CategorySelectList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Amount</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input class="input" type="text" name="Transaction.Amount" value="@Model.Transaction.Amount" placeholder="40.50">
+                            <span class="icon is-small is-left">
+                            <i class="fa fa-dollar"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Date</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input id="datepicker" class="input" type="text" name="Transaction.Date" placeholder="mm/dd/yyyy" />
+                            <span class="icon is-small is-left">
+                            <i class="fa fa-calendar"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Is Income</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            @Html.CheckBoxFor(x => x.Transaction.IsIncome, new { @class = "checkbox" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Description</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-danger" type="text" name="Transaction.Description" value="@Model.Transaction.Description" placeholder="e.g. Kroger">
+                        </div>
+                        <p class="help is-danger">
+                            This field is required
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">Comments</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea" name="Transaction.Comments">@Model.Transaction.Comments</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label">
+                    <!-- Left empty for spacing -->
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button is-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
 @section extrajs
 {
-    <script type="text/javascript" src="~/lib/momentjs/moment.js"></script>
-    <script type="text/javascript" src="~/lib/parsleyjs/js/parsley.js"></script>
-    <script type="text/javascript" src="~/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="~/lib/luxon/luxon.min.js"></script>
+    <script type="text/javascript" src="~/lib/bulma-calendar/js/datepicker.min.js"></script>
 }
-
-<div id="page-wrapper">
-    @{ await Html.RenderPartialAsync("_TransactionForm"); }
-</div>
 
 @section extrascripts
 {
     <script type="text/javascript">
-    $(function(){
-      $('#dp_transaction').datetimepicker({
-          format: 'MM/DD/YYYY'
-      });
-    });
-
-  		function CategoryCtrl($scope, $http){
-            $scope.selectedCategory = "";
-            $scope.categories = [];
-
-            $http({
-                method: "GET",
-                url: "/category/index",
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            }).success(function(result){
-                $scope.categories = result;
+        document.addEventListener( 'DOMContentLoaded', function () {
+            var datePicker = new DatePicker(document.getElementById('datepicker'), {
+                dataFormat: 'mm/dd/yyyy',
             });
-        }
+        });
+
+        Vue.use(Buefy.default, {
+	        defaultIconPack: 'fa'
+        });
+
+        var vm = new Vue({
+            el: '#v-transaction-form',
+            data: {
+            },
+        });
     </script>
 }

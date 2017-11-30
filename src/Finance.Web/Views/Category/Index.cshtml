@@ -4,51 +4,38 @@
     ViewBag.Title = "Categories";
 }
 
-<div id="v-categories" class="container-fluid">
-	<div class="animated fadeIn">
-	    <div class="row">
-	        <div class="col-md-12">
-	            <div class="card">
-	                <div class="card-header">
-	                    <i class="fa fa-align-justify"></i> Categories
-	                </div>
-	                <div class="card-block">
-						<form id="search">
-                            Search <input name="query" v-model="searchQuery">
-						</form>
-						<br />
-						<custom-grid
-							:data="gridData"
-							:columns="gridColumns"
-							:display-names="displayNames"
-							:filter-key="searchQuery">
-						</custom-grid>
-	                    
-	                    <!-- <nav>
-	                        <ul class="pagination">
-	                            <li class="page-item">
-									<a class="page-link" href="#">Prev</a>
-	                            </li>
-	                            <li class="page-item active">
-	                                <a class="page-link" href="#">1</a>
-	                            </li>
-	                            <li class="page-item">
-									<a class="page-link" href="#">Next</a>
-	                            </li>
-	                        </ul>
-	                    </nav> -->
-	                </div>
-	            </div>
-	            <p>
-	                <a href="/category/create" class="btn btn-primary">Create New Category</a>
-	            </p>
-	        </div>
+<div id="v-categories">
+    <div class="level">
+		<div class="level-left">
+            <div class="level-item">
+                <div class="title">Categories</div>
+            </div>
+        </div>
+	</div>
+	<div class="columns is-multiline">
+        <div class="column is-12">
+			<form id="search">
+				Search <input class="input" name="query" v-model="searchQuery">
+			</form>
+			<br />
+			<div class="table-wrapper">
+				<custom-grid
+					:data="gridData"
+					:columns="gridColumns"
+					:display-names="displayNames"
+					:filter-key="searchQuery">
+				</custom-grid>
+			</div>
+			
+			<p>
+				<a href="@Url.Action("create","category")" class="button is-primary">Create New</a>
+			</p>
 		</div>
 	</div>
 </div>
 
 <script type="text/x-template" id="grid-template">
-    <table class="table table-condensed">
+    <table class="table is-hoverable is-striped is-fullwidth">
         <thead>
         <tr>
             <th v-for="key in columns" v-on:click="sortBy(key)" :class="{ active: sortKey == key }">
@@ -59,7 +46,7 @@
         </thead>
         <tbody>
         <tr v-for="(entry, index) in filteredData">
-            <td v-for="key in columns">{{entry[key]}}</td>
+            <td class="has-text-left" v-for="key in columns">{{entry[key]}}</td>
 			<td>
 				<a :href="'/category/edit/' + entry.id"><span class="fa fa-edit"></span> </a>
 				<a :href="'/category/delete/' + entry.id"><span class="fa fa-trash"></span></a>

@@ -1,4 +1,24 @@
-﻿function transactionList() {}
+﻿Vue.use(Buefy.default, {
+	defaultIconPack: 'fa'
+});
+
+function transactionList() {}
+
+transactionList.years = [];
+transactionList.months = [
+    {value:1, text: "January"}, 
+    {value: 2, text: "February"}, 
+    {value: 3, text: "March"}, 
+    {value: 4, text: "April"},
+    {value: 5, text: "May"}, 
+    {value: 6, text: "June"}, 
+    {value: 7, text: "July"}, 
+    {value: 8, text: "August"}, 
+    {value: 9, text: "September"}, 
+    {value: 10, text: "October"}, 
+    {value: 11, text: "November"}, 
+    {value: 12, text: "December"}
+];
 
 transactionList.getTransactions = function(year, month) {
     let obj = {
@@ -15,17 +35,30 @@ transactionList.getTransactions = function(year, month) {
 transactionList.vm = new Vue({
     el: '#v-transactions',
     data: {
+        date: new Date(),
         sortKey: 'amount',
         reverse: false,
         searchQuery: '',
+        loading: true,
         gridColumns: ['description', 'date', 'name', 'amount'],
         gridData: [],
         sortByAmount: false,
+        selectedMonth: (new Date()).getMonth() + 1,
+        selectedYear: (new Date()).getFullYear(),
+        months: transactionList.months,
     },
     mounted: function() {
         this.populateTransactions();
     },
     computed: {
+        years: function() {
+            let y = [];
+            let yearNow = (new Date()).getFullYear();
+            for(i = yearNow; i >= 2000; i--) {
+                y.push(i);
+            }
+            return y;
+        },
         totalIncome: function() {
             let sum = _(this.gridData)
             .filter(x => x.isIncome == true)
@@ -45,30 +78,24 @@ transactionList.vm = new Vue({
         },
     },   
     methods: {
+        monthChanged: function() {
+            this.loading = true;
+            this.populateTransactions(year=this.selectedYear, month=this.selectedMonth);
+        },
+        yearChanged: function() {
+            this.loading = true;
+            this.populateTransactions(year=this.selectedYear, month=this.selectedMonth);
+        },
         populateTransactions: function(year=0, month=0) {
             transactionList.getTransactions(year, month)
             .then(data => {
                 let result = JSON.parse(data);
                 this.gridData = result;
+                this.loading = false;
             })
             .catch(error => {
                 console.log('error:' + error);
-            });
-        },
-        sortBy: function(array, param, reverse) {
-            var filterA, filterB;
-            return array.sort(function(a, b) {
-                switch(param) {
-                    case 'amount':
-                        filterA = a.amount;
-                        filterB = b.amount;
-                        break;
-                }
-                if (reverse) {
-					return (filterA > filterB) ? 1 : -1;
-				} else {
-					return (filterA < filterB) ? 1 : -1;
-				}
+                this.loading = false;
             });
         },
         getByDate: function (event) {
@@ -80,10 +107,4 @@ transactionList.vm = new Vue({
             }
         },
     },
-    watch: {
-        sortByAmount: function(val) {
-            var self = this;
-            self.gridData = self.sortBy(self.gridData, 'amount', val);
-        }
-    }
 });

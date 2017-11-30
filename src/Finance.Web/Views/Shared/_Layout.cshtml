@@ -1,129 +1,124 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/style.css">
-	<!--<link rel="stylesheet" href="~/css/site.css">-->
-    
-    @RenderSection("extracss", required: false)
+  <meta name="robots" content="index, follow" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=7">
+
+  <meta name="language" content="en-EN" />
+  <title>Personal Finance</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+  @RenderSection("extracss", required: false)
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-    <header class="app-header navbar">
-        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">☰</button>
-        <a class="navbar-brand" href="#">Finance</a>
-        <ul class="nav navbar-nav d-md-down-none">
-            <li class="nav-item">
-                <a class="nav-link navbar-toggler sidebar-toggler" href="#">☰</a>
-            </li>
 
-            <li class="nav-item px-3">
-                <a class="nav-link" href="/">Dashboard</a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item d-md-down-none">
-                <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span class="d-md-down-none">admin</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-
-                    <div class="dropdown-header text-center">
-                        <strong>Account</strong>
-                    </div>
-
-                    <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
-
-                    <div class="dropdown-header text-center">
-                        <strong>Settings</strong>
-                    </div>
-
-                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
-                    <div class="divider"></div>
-                    <a class="dropdown-item" href="/auth/signout"><i class="fa fa-lock"></i> Logout</a>
-                </div>
-            </li>
-            <li class="nav-item d-md-down-none"></li>
-        </ul>
-    </header>
-
-    <div class="app-body">
-        <div class="sidebar">
-            <nav class="sidebar-nav">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><i class="fa fa-dashboard"></i> Dashboard </a>
-                    </li>
-
-                    <li class="nav-title">Menu</li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/transaction"><i class="fa fa-money"></i> Transactions </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/category/index"><i class="fa fa-plug"></i> Categories</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="nav-title">
-                        Extras
-                    </li>
-                    <li class="nav-item nav-dropdown">
-                        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Admin</a>
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" target="_top"><i class="fa fa-user"></i> Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/hangfire" target="_top"><i class="fa fa-pie-chart"></i> Jobs Dashboard</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+<body>
+  <header class="hero is-light">
+    <div class="hero-head">
+      <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item">Personal Finance</a>
+          <a class="navbar-item is-tab is-hidden-mobile is-active" href="/">
+              <span class="icon is-medium"><i class="fa fa-home"></i></span>Home
+          </a>
+          <button class="button navbar-burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-
-        <main class="main">
-            <ol class="breadcrumb"></ol>
-
-            @RenderBody()
-
-        </main>
+        <div class="navbar-menu navbar-end" id="navMenu">
+          <a class="navbar-item is-tab is-hidden-tablet is-active" href="/">Home</a>
+          <a class="navbar-item nav-tag">              
+            <span class="icon is-small">
+              <i class="fa fa-envelope-o"></i>
+            </span>
+            <span class="tag is-primary tag-notif">6</span>
+          </a>  
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">              
+              <figure class="image is-32x32" style="margin-right:.5em;">
+                <i class="fa fa-user fa-2x"></i>
+              </figure>
+            </a>
+          
+            <div class="navbar-dropdown is-right">              
+                <a class="navbar-item">
+                  <span class="icon is-small">
+                    <i class="fa fa-user-o"></i>
+                  </span>
+                  Profile
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="/auth/signout">
+                  <span class="icon is-small">
+                    <i class="fa fa-power-off"></i>
+                  </span>
+                  Logout
+                </a>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
+  </header>
 
-    <footer class="app-footer">
-        <a href="https://myfinance.robintiwari.com">Personal Finance</a> © 2017.
-    </footer>
+  <div class="section">
+    <div class="columns">
+      <aside class="column is-2">
+        <nav class="menu">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a class="is-active" href="#"><span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard</a></li>
+          </ul>
+          <p class="menu-label">
+            Administration
+          </p>
+          <ul class="menu-list">
+            <li><a href="/transaction"><span class="icon is-small"><i class="fa fa-dollar"></i></span> Transactions</a></li>
+            <li><a href="/category/index"><span class="icon is-small"><i class="fa fa-desktop"></i></span> Categories</a></li>
+            <li>
+              <a class=""><i class="fa fa-cog"></i> Settings</a>
+              <ul>
+                <li><a>Members</a></li>
+              </ul>
+            </li>
+          </ul>
+          <p class="menu-label">
+            Extras
+          </p>
+          <ul class="menu-list">
+            <li><a><span class="icon is-small"><i class="fa fa-bug"></i></span> Tasks</a></li>
+          </ul>
+        </nav>
+      </aside>
 
+      <main class="column">
+        @RenderBody()
+        
+      </main>
+    </div>
+  </div>
     <environment names="Development">
-		<script src="~/lib/jquery/jquery.js" asp-append-version="true"></script>
-		<script src="~/lib/vuejs/vue.js" asp-append-version="true"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+        <script src="/js/site.js" asp-append-version="true"></script>
+        <script src="/js/app.js" asp-append-version="true"></script>
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/buefy"></script>
     </environment>
 
     <environment names="Staging,Production">
-		<script src="~/lib/vuejs/vue.min.js" asp-append-version="true"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery">
-        </script>
+        <script src="/js/site.js" asp-append-version="true"></script>
+        <script src="/js/app.js" asp-append-version="true"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.8/vue.min.js" asp-append-version="true"></script>
+        <script src="https://unpkg.com/buefy"></script>
     </environment>
-
-	<script src="~/lib/tether/js/tether.min.js"></script>
-	<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-		
-    <script src="~/lib/toastr/js/toastr.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="~/js/app.js" asp-append-version="true"></script>
-
-    @RenderSection("extrajs", required: false)
-    @RenderSection("extrascripts", required: false)
+  @RenderSection("extrajs", required: false)
+  @RenderSection("extrascripts", required: false)
 </body>
 </html>

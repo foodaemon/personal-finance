@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Category";
 }
 
 @section extrajs
@@ -7,8 +7,6 @@
     <script type="text/javascript" src="~/lib/parsleyjs/js/parsley.js"></script>
 }
 
-<div class="container-fluid">
-    <div class="animated fadeIn">
-        @{ await Html.RenderPartialAsync("_CategoryForm"); }
-    </div>
+<div id="v-category-form" class="columns is-multiline">
+    @{ await Html.RenderPartialAsync("_CategoryForm"); }
 </div>
