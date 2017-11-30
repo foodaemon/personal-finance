@@ -5,68 +5,68 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@ViewData["Title"]</title>
-    <link href="~/lib/font-awesome/font-awesome.css" rel="stylesheet">
-    <link href="~/css/simple-line-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/lib/toastr/css/toastr.css">
-	<link href="~/css/style.css" rel="stylesheet" />
+  <meta name="robots" content="index, follow" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=7">
+
+  <meta name="language" content="en-EN" />
+  <title>Personal Finance - Login</title>
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
+  <link rel="stylesheet" type="text/css" href="~/css/login.css">
 </head>
-<body class="app flex-row align-items-center">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card-group mb-0">
-					<form role="form" action="/auth/signin" method="post" data-parsley-validate>
-					@Html.AntiForgeryToken()
-                    <div class="card p-4">
-                        <div class="card-block">
-                            <h1>Login</h1>
-                            <p class="text-muted">Sign In to your account</p>
-                            <div class="input-group mb-3">
-                                <span class="input-group-addon"><i class="icon-user"></i>
-                                </span>
-                                <input type="text" class="form-control" name="email" placeholder="email" autofocus required>
-                            </div>
-                            <div class="input-group mb-4">
-                                <span class="input-group-addon"><i class="icon-lock"></i>
-                                </span>
-                                <input type="password" class="form-control" placeholder="Password" name="password" required>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-primary px-4">Login</button>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <button type="button" class="btn btn-link px-0">Forgot password?</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					</form>
-                    <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-                        <div class="card-block text-center">
-                            <div>
-                                <h2>Sign up</h2>
-                                <p></p>
-                                <button type="button" class="btn btn-primary active mt-3">Register Now!</button>
-                            </div>
-                        </div>
-                    </div>
+
+<body>
+  <section class="hero is-success is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+          <h3 class="title has-text-grey">Login</h3>
+          <p class="subtitle has-text-grey">Please login to proceed.</p>
+          <div class="box">
+            <figure class="avatar">
+              <i class="fa fa-user fa-5x"></i>
+            </figure>
+            <form role="form" action="/auth/signin" method="post">
+			  @Html.AntiForgeryToken()
+              <div class="field">
+                <div class="control">
+                  <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
                 </div>
-            </div>
+              </div>
+
+              <div class="field">
+                <div class="control">
+                  <input class="input is-large" type="password" name="password" placeholder="Your Password">
+                </div>
+              </div>
+              <div class="field">
+                <label class="checkbox">
+                  <input type="checkbox">
+                  Remember me
+                </label>
+              </div>
+              <button type="submit" class="button is-primary">Login</button>
+            </form>
+          </div>
+          <p class="has-text-grey">
+            <!-- <a href="../">Sign Up</a> &nbsp;·&nbsp;
+            <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+            <a href="../">Need Help?</a> -->
+          </p>
         </div>
+      </div>
     </div>
-    
-    <script src="~/lib/jquery/jquery.js"></script>
-    <script src="~/lib/tether/js/tether.min.js"></script>
-	<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/lib/toastr/js/toastr.js"></script>
-    <script src="~/js/site.js"></script>
-    <script src="~/js/app.js"></script>
+  </section>
+  <script async type="text/javascript" src="~/js/site.js"></script>
+  
 </body>
 </html>
