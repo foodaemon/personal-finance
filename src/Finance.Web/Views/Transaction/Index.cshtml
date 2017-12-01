@@ -55,8 +55,9 @@
                 </b-table-column>
 
                 <b-table-column field="amount" label="Amount" sortable numeric>
-                    <span class="tag is-success">{{ props.row.amount }}</span>
+                    <span class="tag" v-bind:class="{ 'is-success': props.row.isIncome, 'is-danger': !props.row.isIncome }">{{ props.row.amount }}</span>
                 </b-table-column>
+
                 <b-table-column field="" label="" sortable numeric>
                     <a :href="'/transaction/edit/' + props.row.id"><span class="fa fa-edit"></span> </a>
                     <a :href="'/transaction/delete/' + props.row.id"><span class="fa fa-trash"></span></a>
