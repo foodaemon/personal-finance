@@ -89,7 +89,7 @@ namespace Finance.Web.Controllers
         {
             var month = DateTime.Now.Month;
             var year = DateTime.Now.Year;
-            var transactions = await _transactionService.GetTransactionByMonthAndYear(year: year, month: month);
+            var transactions = await _transactionService.GetTransactionByMonthAndYear(month: month, year: year);
             var expenses = _transactionService.GetTotalExpensesByCategory(transactions);
 
             var jsonResult = new JsonResult(value: expenses);

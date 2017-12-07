@@ -75,7 +75,7 @@
             General
           </p>
           <ul class="menu-list">
-            <li><a class="is-active" href="#"><span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard</a></li>
+            <li><a class="is-active" href="/"><span class="icon is-small"><i class="fa fa-tachometer"></i></span> Dashboard</a></li>
           </ul>
           <p class="menu-label">
             Administration
@@ -99,25 +99,24 @@
         </nav>
       </aside>
 
-      <main class="column">
+      <main id="v-main" class="column">
         @RenderBody()
-        
       </main>
     </div>
   </div>
-    <environment names="Development">
-        <script src="/js/site.js" asp-append-version="true"></script>
-        <script src="/js/app.js" asp-append-version="true"></script>
-        <script src="https://unpkg.com/vue/dist/vue.js"></script>
-        <script src="https://unpkg.com/buefy"></script>
-    </environment>
+  <environment names="Development">
+      <script src="/js/site.js" asp-append-version="true"></script>
+      <script src="/js/app.js" asp-append-version="true"></script>
+      <script src="https://unpkg.com/vue/dist/vue.js"></script>
+      <script src="https://unpkg.com/buefy"></script>
+  </environment>
 
-    <environment names="Staging,Production">
-        <script src="/js/site.js" asp-append-version="true"></script>
-        <script src="/js/app.js" asp-append-version="true"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.8/vue.min.js" asp-append-version="true"></script>
-        <script src="https://unpkg.com/buefy"></script>
-    </environment>
+  <environment names="Staging,Production">
+      <script src="/js/site.js" asp-append-version="true"></script>
+      <script src="/js/app.js" asp-append-version="true"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.8/vue.min.js" asp-append-version="true"></script>
+      <script src="https://unpkg.com/buefy"></script>
+  </environment>
   @RenderSection("extrajs", required: false)
   @RenderSection("extrascripts", required: false)
 </body>
