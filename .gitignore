@@ -295,5 +295,6 @@ __pycache__/
 *.xsd.cs
 
 # Project
+files/
 appsettings.json
 appsettings.Development.json
