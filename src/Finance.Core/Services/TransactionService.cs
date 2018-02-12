@@ -102,7 +102,7 @@ namespace Finance.Core.Services
             transaction.UpdatedAt = DateTime.Now;
             _transactionRepository.Insert(transaction);
         }
-
+        
         public async Task UpdateTransaction(Transaction transaction)
         {
             var data = await GetTransactionById(transaction.Id);

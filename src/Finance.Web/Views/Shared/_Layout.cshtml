@@ -10,8 +10,8 @@
   <meta name="language" content="en-EN" />
   <title>Personal Finance</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
   @RenderSection("extracss", required: false)
 </head>
@@ -81,7 +81,7 @@
             Administration
           </p>
           <ul class="menu-list">
-            <li><a href="/transaction"><span class="icon is-small"><i class="fa fa-dollar"></i></span> Transactions</a></li>
+            <li><a href="/transaction"><span class="icon is-small"><i class="fas fa-dollar-sign"></i></span> Transactions</a></li>
             <li><a href="/category/index"><span class="icon is-small"><i class="fa fa-desktop"></i></span> Categories</a></li>
             <li>
               <a class=""><i class="fa fa-cog"></i> Settings</a>
@@ -94,7 +94,8 @@
             Extras
           </p>
           <ul class="menu-list">
-            <li><a><span class="icon is-small"><i class="fa fa-bug"></i></span> Tasks</a></li>
+            <li><a><span class="icon is-small"><i class="fas fa-bug"></i></span> Tasks</a></li>
+            <li><a href="/utility/importfile"><span class="icon is-small"><i class="fas fa-cloud-upload-alt"></i></span> Import</a></li>
           </ul>
         </nav>
       </aside>
