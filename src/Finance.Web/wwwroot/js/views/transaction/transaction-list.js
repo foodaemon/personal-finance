@@ -48,7 +48,14 @@ transactionList.vm = new Vue({
         months: transactionList.months,
     },
     mounted: function() {
-        this.populateTransactions();
+        let url = new URL(window.location.href);
+        let month = url.searchParams.get("month") || 0;
+        let year = url.searchParams.get("year") || 0;
+        if (month > 0 && year > 0) {
+            this.selectedMonth = month;
+            this.selectedYear = year;
+        }
+        this.populateTransactions(year=year, month=month);
     },
     computed: {
         years: function() {
