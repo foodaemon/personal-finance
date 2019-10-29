@@ -6,7 +6,7 @@
     <PackageReference Include="Hangfire.AspNetCore" Version="1.6.17" />
     <PackageReference Include="Hangfire.Core" Version="1.6.17" />
     <PackageReference Include="Hangfire.Redis.StackExchange" Version="1.7.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.0.0" />
     <PackageReference Include="StackExchange.Redis" Version="1.2.6" />
   </ItemGroup>
